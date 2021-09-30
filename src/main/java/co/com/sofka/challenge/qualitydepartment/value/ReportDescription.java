@@ -4,33 +4,33 @@ import co.com.sofka.domain.generic.ValueObject;
 
 import java.util.Objects;
 
-public class Description implements ValueObject<String> {
+public class ReportDescription implements ValueObject<String> {
 
-    private final String descripcion;
+    private final String reportDescription;
 
-    public Description(String value){
+    public ReportDescription(String value){
         Objects.requireNonNull(value,"Quality report description cannot be null");
         if(value.trim().isBlank()) {
             throw new IllegalArgumentException("Quality report description cannot be blank");
         }
-        this.descripcion = value;
+        this.reportDescription = value;
     }
 
     @Override
     public String value() {
-        return this.descripcion;
+        return this.reportDescription;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Description)) return false;
-        Description that = (Description) o;
-        return descripcion.equals(that.descripcion);
+        if (!(o instanceof ReportDescription)) return false;
+        ReportDescription that = (ReportDescription) o;
+        return reportDescription.equals(that.reportDescription);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(descripcion);
+        return Objects.hash(reportDescription);
     }
 }

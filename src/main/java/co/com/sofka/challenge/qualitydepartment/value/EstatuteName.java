@@ -23,4 +23,17 @@ public class EstatuteName implements ValueObject<String> {
     public String value() {
         return this.estatuteName;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof EstatuteName)) return false;
+        EstatuteName that = (EstatuteName) o;
+        return estatuteName.equals(that.estatuteName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(estatuteName);
+    }
 }

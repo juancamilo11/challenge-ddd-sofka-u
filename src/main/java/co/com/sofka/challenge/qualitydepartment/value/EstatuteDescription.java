@@ -24,4 +24,16 @@ public class EstatuteDescription implements ValueObject<String> {
         return this.estatuteDescription;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof EstatuteDescription)) return false;
+        EstatuteDescription that = (EstatuteDescription) o;
+        return estatuteDescription.equals(that.estatuteDescription);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(estatuteDescription);
+    }
 }

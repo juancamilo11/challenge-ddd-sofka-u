@@ -24,4 +24,16 @@ public class CapacitationSubject implements ValueObject<String> {
         return this.capacitationSubject;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CapacitationSubject)) return false;
+        CapacitationSubject that = (CapacitationSubject) o;
+        return capacitationSubject.equals(that.capacitationSubject);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(capacitationSubject);
+    }
 }

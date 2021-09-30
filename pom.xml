@@ -28,15 +28,18 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/co.com.sofka/business -->
         <dependency>
             <groupId>co.com.sofka</groupId>
             <artifactId>business</artifactId>
-            <scope>1.5.0</scope>
+            <version>1.5.0</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/co.com.sofka/domain -->
         <dependency>
             <groupId>co.com.sofka</groupId>
             <artifactId>domain</artifactId>
-            <version>1.0.0</version>
+            <version>1.5.0</version>
         </dependency>
 
     </dependencies>

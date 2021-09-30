@@ -12,7 +12,7 @@ public class QualityDepartmentId extends Identity {
     public static QualityDepartmentId of(String id) {
         Objects.requireNonNull(id);
         if(id.isBlank()){
-            throw new IllegalArgumentException("Id cannot be blank");
+            throw new IllegalArgumentException("Id for quality department cannot be blank");
         }
         return new QualityDepartmentId(id);
     }

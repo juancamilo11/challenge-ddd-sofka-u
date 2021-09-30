@@ -6,6 +6,8 @@ import co.com.sofka.challenge.workingarea.value.RawMaterialProviderId;
 import co.com.sofka.challenge.workingarea.value.TypeOfMaterial;
 import co.com.sofka.domain.generic.Entity;
 
+import java.util.Objects;
+
 public class RawMaterialProvider extends Entity<RawMaterialProviderId> {
 
     private Name name;
@@ -29,14 +31,14 @@ public class RawMaterialProvider extends Entity<RawMaterialProviderId> {
     }
 
     public void updateName(Name name) {
-        this.name = name;
+        this.name = Objects.requireNonNull(name);
     }
 
     public void updatePhoneNumber(PhoneNumber phoneNumber) {
-        this.phoneNumber = phoneNumber;
+        this.phoneNumber = Objects.requireNonNull(phoneNumber);
     }
 
     public void updateTypeOfMaterial(TypeOfMaterial typeOfMaterial) {
-        this.typeOfMaterial = typeOfMaterial;
+        this.typeOfMaterial = Objects.requireNonNull(typeOfMaterial);
     }
 }

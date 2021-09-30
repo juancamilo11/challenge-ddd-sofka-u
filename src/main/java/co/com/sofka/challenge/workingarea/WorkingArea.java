@@ -1,6 +1,8 @@
 package co.com.sofka.challenge.workingarea;
 
 import co.com.sofka.challenge.workingarea.entity.Employee;
+import co.com.sofka.challenge.workingarea.entity.RawMaterialProvider;
+import co.com.sofka.challenge.workingarea.entity.SewingMachine;
 import co.com.sofka.challenge.workingarea.value.*;
 import co.com.sofka.domain.generic.AggregateEvent;
 

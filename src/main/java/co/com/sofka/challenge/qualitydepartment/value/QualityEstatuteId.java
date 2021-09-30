@@ -11,8 +11,8 @@ public class QualityEstatuteId extends Identity {
     }
 
     public static QualityEstatuteId of(String id) {
-        Objects.requireNonNull(id);
-        if(id.isBlank()){
+        Objects.requireNonNull(id, "Id for quality estatute cannot be null");
+        if(id.trim().isBlank()){
             throw new IllegalArgumentException("Id for quality estatute cannot be blank");
         }
         return new QualityEstatuteId(id);

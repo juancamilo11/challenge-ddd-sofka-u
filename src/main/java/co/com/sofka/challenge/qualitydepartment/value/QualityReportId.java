@@ -11,7 +11,7 @@ public class QualityReportId extends Identity {
     }
 
     public static QualityReportId of(String id) {
-        Objects.requireNonNull(id);
+        Objects.requireNonNull(id, "Id for quality report cannot be null");
         if (id.trim().isBlank()) {
             throw new IllegalArgumentException("Id for quality report cannot be blank");
         }

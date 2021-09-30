@@ -16,7 +16,7 @@ public class OfficeNumber implements ValueObject<Integer> {
                 .compile("[0-9]{1,2}");
         Matcher matcher = pattern.matcher(String.valueOf(value));
         if (!matcher.find() || value <= 0) {
-            throw new IllegalArgumentException("Office number must be less than 100");
+            throw new IllegalArgumentException("Office number must be between 0 and 100");
         }
         this.officeNumber = value;
     }

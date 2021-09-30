@@ -5,7 +5,9 @@ import co.com.sofka.domain.generic.Entity;
 
 public class JobCapacitation extends Entity<JobCapacitationId> {
 
-    public JobCapacitation(JobCapacitationId entityId) {
-        super(entityId);
+
+
+    public JobCapacitation(JobCapacitationId jobCapacitationId) {
+        super(jobCapacitationId);
     }
 }

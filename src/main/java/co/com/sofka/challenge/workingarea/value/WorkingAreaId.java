@@ -11,7 +11,7 @@ public class WorkingAreaId extends Identity {
     }
 
     public static WorkingAreaId of(String id) {
-        Objects.requireNonNull(id);
+        Objects.requireNonNull(id,"Id for working area cannot be null");
         if (id.trim().isBlank()) {
             throw new IllegalArgumentException("Id for working area cannot be blank");
         }

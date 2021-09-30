@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class Grade implements ValueObject<Double> {
 
-    private Double grade;
+    private final Double grade;
 
     public Grade(Double value){
         Objects.requireNonNull(value,"Grade for quality report cannot be null");

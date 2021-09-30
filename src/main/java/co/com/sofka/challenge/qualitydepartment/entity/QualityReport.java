@@ -8,7 +8,6 @@ import co.com.sofka.domain.generic.Entity;
 
 public class QualityReport extends Entity<QualityReportId> {
 
-    private WorkingAreaId workingAreaId;
     private Description description;
     private Grade grade;
 

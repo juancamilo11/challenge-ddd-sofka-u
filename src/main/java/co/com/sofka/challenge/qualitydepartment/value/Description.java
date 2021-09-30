@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class Description implements ValueObject<String> {
 
-    private String descripcion;
+    private final String descripcion;
 
     public Description(String value){
         Objects.requireNonNull(value,"Quality report description cannot be null");

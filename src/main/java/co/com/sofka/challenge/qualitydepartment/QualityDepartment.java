@@ -6,6 +6,7 @@ import co.com.sofka.challenge.qualitydepartment.event.*;
 import co.com.sofka.challenge.qualitydepartment.value.*;
 import co.com.sofka.challenge.workingarea.value.*;
 import co.com.sofka.domain.generic.AggregateEvent;
+import co.com.sofka.domain.generic.DomainEvent;
 
 import java.util.List;
 import java.util.Objects;
@@ -22,9 +23,20 @@ public class QualityDepartment extends AggregateEvent<QualityDepartmentId> {
     protected List<QualityEstatute> qualityEstatuteList;
     protected JobCapacitation jobCapacitation;
 
-    public QualityDepartment(QualityDepartmentId qualityDepartmentId) {
+    public QualityDepartment(QualityDepartmentId qualityDepartmentId, OfficeNumber officeNumber, Email email, List<WorkingAreaId> workingAreaIdList) {
         super(qualityDepartmentId);
         appendChange(new QualityDepartmentCreated(officeNumber, email, workingAreaIdList)).apply();
+    }
+
+    private QualityDepartment(QualityDepartmentId qualityDepartmentId){
+        super(qualityDepartmentId);
+        subscribe(new QualityDepartmentChange(this));
+    }
+
+    public static QualityDepartment from(QualityDepartmentId qualityDepartmentId, List<DomainEvent> eventList){
+        var qualityDepartment = new QualityDepartment(qualityDepartmentId);
+        eventList.forEach(qualityDepartment::applyEvent);
+        return qualityDepartment;
     }
 
     public void addQualityReport(QualityReportId qualityReportId, WorkingAreaId workingAreaId ,ReportDescription reportDescription, Grade grade){

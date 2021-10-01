@@ -8,6 +8,7 @@ import co.com.sofka.challenge.workingarea.entity.RawMaterialProvider;
 import co.com.sofka.challenge.workingarea.entity.SewingMachine;
 import co.com.sofka.challenge.workingarea.value.*;
 import co.com.sofka.domain.generic.AggregateEvent;
+import co.com.sofka.domain.generic.DomainEvent;
 
 import java.util.List;
 import java.util.Objects;
@@ -27,6 +28,17 @@ public class WorkingArea extends AggregateEvent<WorkingAreaId> {
     public WorkingArea(WorkingAreaId workingAreaId,TypeOfMaterial typeOfMaterial , Location location, WorkingTime workingTime) {
         super(workingAreaId);
         appendChange(new WorkingAreaCreated(typeOfMaterial, location, workingTime)).apply();
+    }
+
+    private WorkingArea(WorkingAreaId workingAreaId){
+        super(workingAreaId);
+        subscribe(new WorkingAreaChange(this));
+    }
+
+    public static WorkingArea from(WorkingAreaId workingAreaId, List<DomainEvent> eventList){
+        var workingArea = new WorkingArea(workingAreaId);
+        eventList.forEach(workingArea::applyEvent);
+        return workingArea;
     }
 
     public void addEmployee(EmployeeId employeeId, Name name, PhoneNumber phoneNumber, JobContract jobContract){

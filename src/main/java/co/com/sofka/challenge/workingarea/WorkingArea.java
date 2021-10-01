@@ -29,7 +29,6 @@ public class WorkingArea extends AggregateEvent<WorkingAreaId> {
         appendChange(new WorkingAreaCreated(typeOfMaterial, location, workingTime)).apply();
     }
 
-
     public void addEmployee(EmployeeId employeeId, Name name, PhoneNumber phoneNumber, JobContract jobContract){
         Objects.requireNonNull(employeeId);
         Objects.requireNonNull(name);
@@ -75,7 +74,6 @@ public class WorkingArea extends AggregateEvent<WorkingAreaId> {
                 .findFirst();
     }
 
-
     public void deleteEmployee(EmployeeId employeeId){
         Objects.requireNonNull(employeeId);
         appendChange(new EmployeeDeleted(employeeId)).apply();
@@ -91,7 +89,6 @@ public class WorkingArea extends AggregateEvent<WorkingAreaId> {
         appendChange(new RawMaterialProviderDeleted(rawMaterialProviderId)).apply();
     }
 
-
     public void orderEmployeeToWork(EmployeeId employeeId){
         Objects.requireNonNull(employeeId);
         appendChange(new EmployeeOrderedToWork(employeeId)).apply();
@@ -101,7 +98,6 @@ public class WorkingArea extends AggregateEvent<WorkingAreaId> {
         Objects.requireNonNull(employeeId);
         appendChange(new EmployeeOrderedToTopWorking(employeeId)).apply();
     }
-
 
     public void updateTypeOfMaterial(TypeOfMaterial typeOfMaterial){
         Objects.requireNonNull(typeOfMaterial);
@@ -118,7 +114,6 @@ public class WorkingArea extends AggregateEvent<WorkingAreaId> {
         appendChange(new WorkingTimeUpdated(workingTime)).apply();
     }
 
-
     public void updateEmployeeName(Name name){
         Objects.requireNonNull(name);
         appendChange(new EmployeeNameUpdated(name)).apply();
@@ -133,7 +128,6 @@ public class WorkingArea extends AggregateEvent<WorkingAreaId> {
         Objects.requireNonNull(jobContract);
         appendChange(new EmployeeJobContractUpdated(jobContract)).apply();
     }
-
 
     public void updateMachineDescription(UserGuide userGuide){
         Objects.requireNonNull(userGuide);
@@ -150,13 +144,6 @@ public class WorkingArea extends AggregateEvent<WorkingAreaId> {
         appendChange(new MachineNextMaintenanceDateUpdated(jobContract)).apply();
     }
 
-
-
-
-    public TypeOfMaterial typeOfMaterial() {
-        return this.typeOfMaterial;
-    }
-
     public Location location() {
         return this.location;
     }
@@ -167,6 +154,10 @@ public class WorkingArea extends AggregateEvent<WorkingAreaId> {
 
     public List<Employee> employeeList() {
         return this.employeeList;
+    }
+
+    public TypeOfMaterial typeOfMaterial() {
+        return this.typeOfMaterial;
     }
 
     public List<SewingMachine> sewingMachineList() {

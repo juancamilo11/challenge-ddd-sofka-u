@@ -11,6 +11,7 @@ public class EmployeeAdded extends DomainEvent {
     private Name name;
     private PhoneNumber phoneNumber;
     private JobContract jobContract;
+    private IsWorking isWorking;
 
     public EmployeeAdded(EmployeeId employeeId, Name name, PhoneNumber phoneNumber, JobContract jobContract) {
         super("sofka.workingarea.employeeadded");
@@ -18,6 +19,7 @@ public class EmployeeAdded extends DomainEvent {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.jobContract = jobContract;
+        this.isWorking = new IsWorking(false);
     }
 
     public EmployeeId getEmployeeId() {
@@ -50,5 +52,13 @@ public class EmployeeAdded extends DomainEvent {
 
     public void setJobContract(JobContract jobContract) {
         this.jobContract = jobContract;
+    }
+
+    public IsWorking getIsWorking() {
+        return this.isWorking;
+    }
+
+    public void setIsWorking(IsWorking isWorking) {
+        this.isWorking = isWorking;
     }
 }

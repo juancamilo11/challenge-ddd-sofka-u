@@ -12,8 +12,10 @@ public class QualityEstatute extends Entity<QualityEstatuteId> {
     private EstatuteName estatuteName;
     private EstatuteDescription estatuteDescription;
 
-    public QualityEstatute(QualityEstatuteId qualityEstatuteId) {
+    public QualityEstatute(QualityEstatuteId qualityEstatuteId, EstatuteName estatuteName, EstatuteDescription estatuteDescription) {
         super(qualityEstatuteId);
+        this.estatuteName = estatuteName;
+        this.estatuteDescription = estatuteDescription;
     }
 
     public EstatuteName estatuteName() {

@@ -14,8 +14,11 @@ public class JobCapacitation extends Entity<JobCapacitationId> {
     private CapacitationSubject capacitationSubject;
     private CapacitationInfo capacitationInfo;
 
-    public JobCapacitation(JobCapacitationId jobCapacitationId) {
+    public JobCapacitation(JobCapacitationId jobCapacitationId, WorkingAreaId workingAreaId, CapacitationSubject capacitationSubject, CapacitationInfo capacitationInfo) {
         super(jobCapacitationId);
+        this.workingAreaId = workingAreaId;
+        this.capacitationSubject = capacitationSubject;
+        this.capacitationInfo = capacitationInfo;
     }
 
     public WorkingAreaId workingAreaId() {

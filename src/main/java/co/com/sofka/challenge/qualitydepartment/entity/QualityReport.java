@@ -3,24 +3,37 @@ package co.com.sofka.challenge.qualitydepartment.entity;
 import co.com.sofka.challenge.qualitydepartment.value.ReportDescription;
 import co.com.sofka.challenge.qualitydepartment.value.Grade;
 import co.com.sofka.challenge.qualitydepartment.value.QualityReportId;
+import co.com.sofka.challenge.workingarea.value.WorkingAreaId;
 import co.com.sofka.domain.generic.Entity;
 
 import java.util.Objects;
 
 public class QualityReport extends Entity<QualityReportId> {
 
+    private WorkingAreaId workingAreaId;
     private ReportDescription reportDescription;
     private Grade grade;
 
-    public QualityReport(QualityReportId qualityReportId) {
+    public QualityReport(QualityReportId qualityReportId, WorkingAreaId workingAreaId, ReportDescription reportDescription, Grade grade) {
         super(qualityReportId);
+        this.workingAreaId = workingAreaId;
+        this.reportDescription = reportDescription;
+        this.grade = grade;
     }
 
-    public ReportDescription getReportDescription() {
+    public WorkingAreaId workingAreaId() {
+        return workingAreaId;
+    }
+
+    public void updateWorkingAreaId(WorkingAreaId workingAreaId) {
+        this.workingAreaId = workingAreaId;
+    }
+
+    public ReportDescription reportDescription() {
         return this.reportDescription;
     }
 
-    public Grade getGrade() {
+    public Grade grade() {
         return this.grade;
     }
 

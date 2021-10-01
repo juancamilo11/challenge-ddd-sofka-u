@@ -2,10 +2,7 @@ package co.com.sofka.challenge.workingarea;
 
 import co.com.sofka.challenge.commons.Name;
 import co.com.sofka.challenge.commons.PhoneNumber;
-import co.com.sofka.challenge.workingarea.event.EmployeeAdded;
-import co.com.sofka.challenge.workingarea.event.RawMaterialProviderAdded;
-import co.com.sofka.challenge.workingarea.event.SewingMachineAdded;
-import co.com.sofka.challenge.workingarea.event.WorkingAreaCreated;
+import co.com.sofka.challenge.workingarea.event.*;
 import co.com.sofka.challenge.workingarea.entity.Employee;
 import co.com.sofka.challenge.workingarea.entity.RawMaterialProvider;
 import co.com.sofka.challenge.workingarea.entity.SewingMachine;
@@ -26,10 +23,12 @@ public class WorkingArea extends AggregateEvent<WorkingAreaId> {
     private List<SewingMachine> sewingMachineList;
     private List<RawMaterialProvider> rawMaterialProviderList;
 
+
     public WorkingArea(WorkingAreaId workingAreaId,TypeOfMaterial typeOfMaterial , Location location, WorkingTime workingTime) {
         super(workingAreaId);
         appendChange(new WorkingAreaCreated(typeOfMaterial, location, workingTime)).apply();
     }
+
 
     public void addEmployee(EmployeeId employeeId, Name name, PhoneNumber phoneNumber, JobContract jobContract){
         Objects.requireNonNull(employeeId);
@@ -54,6 +53,7 @@ public class WorkingArea extends AggregateEvent<WorkingAreaId> {
         appendChange(new RawMaterialProviderAdded(rawMaterialProviderId, name, phoneNumber, typeOfMaterial)).apply();
     }
 
+
     public Optional<Employee> getEmployeeById(EmployeeId employeeId){
         return this.employeeList
                 .stream()
@@ -73,6 +73,65 @@ public class WorkingArea extends AggregateEvent<WorkingAreaId> {
                 .stream()
                 .filter(employee -> employee.identity().equals(rawMaterialProviderId))
                 .findFirst();
+    }
+
+
+    public void deleteEmployee(EmployeeId employeeId){
+        Objects.requireNonNull(employeeId);
+        appendChange(new EmployeeDeleted(employeeId)).apply();
+    }
+
+    public void deleteSewingMachine(SewingMachineId sewingMachineId){
+        Objects.requireNonNull(sewingMachineId);
+        appendChange(new SewingMachineDeleted(sewingMachineId)).apply();
+    }
+
+    public void deleteRawMaterialProvider(RawMaterialProviderId rawMaterialProviderId){
+        Objects.requireNonNull(rawMaterialProviderId);
+        appendChange(new RawMaterialProviderDeleted(rawMaterialProviderId)).apply();
+    }
+
+
+    public void orderEmployeeToWork(EmployeeId employeeId){
+        Objects.requireNonNull(employeeId);
+        appendChange(new EmployeeOrderedToWork(employeeId)).apply();
+    }
+
+    public void orderEmployeeToStopWorking(EmployeeId employeeId){
+        Objects.requireNonNull(employeeId);
+        appendChange(new EmployeeOrderedToTopWorking(employeeId)).apply();
+    }
+
+
+    public void updateTypeOfMaterial(TypeOfMaterial typeOfMaterial){
+        Objects.requireNonNull(typeOfMaterial);
+        appendChange(new TypeOfMaterialUpdated(typeOfMaterial)).apply();
+    }
+
+    public void updateLocation(Location location){
+        Objects.requireNonNull(location);
+        appendChange(new LocationUpdated(location)).apply();
+    }
+
+    public void updateWorkingTime(WorkingTime workingTime){
+        Objects.requireNonNull(workingTime);
+        appendChange(new WorkingTimeUpdated(workingTime)).apply();
+    }
+
+
+    public void updateEmployeeName(Name name){
+        Objects.requireNonNull(name);
+        appendChange(new EmployeeNameUpdated(name)).apply();
+    }
+
+    public void updateEmployeePhoneNumber(PhoneNumber phoneNumber){
+        Objects.requireNonNull(phoneNumber);
+        appendChange(new EmployeePhoneNumberUpdated(phoneNumber)).apply();
+    }
+
+    public void updateEmployeeJobContract(JobContract jobContract){
+        Objects.requireNonNull(jobContract);
+        appendChange(new EmployeeJobContractUpdated(jobContract)).apply();
     }
 
 

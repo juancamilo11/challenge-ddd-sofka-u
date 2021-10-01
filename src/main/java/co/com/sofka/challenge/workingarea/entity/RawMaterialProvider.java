@@ -14,8 +14,11 @@ public class RawMaterialProvider extends Entity<RawMaterialProviderId> {
     private PhoneNumber phoneNumber;
     private TypeOfMaterial typeOfMaterial;
 
-    public RawMaterialProvider(RawMaterialProviderId entityId) {
+    public RawMaterialProvider(RawMaterialProviderId entityId, Name name, PhoneNumber phoneNumber,TypeOfMaterial typeOfMaterial) {
         super(entityId);
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.typeOfMaterial = typeOfMaterial;
     }
 
     public Name name() {

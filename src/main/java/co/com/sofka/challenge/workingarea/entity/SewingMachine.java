@@ -15,8 +15,10 @@ public class SewingMachine extends Entity<SewingMachineId> {
     private DateNextMaintenance dateNextMaintenance;
 
 
-    public SewingMachine(SewingMachineId entityId) {
+    public SewingMachine(SewingMachineId entityId, UserGuide userGuide, PowerConsumption powerConsumption) {
         super(entityId);
+        this.userGuide = userGuide;
+        this.powerConsumption = powerConsumption;
     }
 
     public UserGuide userGuide() {

@@ -16,16 +16,15 @@ public class Employee extends Entity<EmployeeId> {
     private JobContract jobContract;
     private IsWorking isWorking;
 
-    public Employee(EmployeeId entityId) {
+    public Employee(EmployeeId entityId, Name name, PhoneNumber phoneNumber, JobContract jobContract) {
         super(entityId);
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.jobContract = jobContract;
     }
 
     public Name name() {
         return this.name;
-    }
-
-    public IsWorking isWorking() {
-        return isWorking;
     }
 
     public PhoneNumber phoneNumber() {
@@ -34,6 +33,10 @@ public class Employee extends Entity<EmployeeId> {
 
     public JobContract jobContract() {
         return this.jobContract;
+    }
+
+    public IsWorking isWorking() {
+        return this.isWorking;
     }
 
     public void updateName(Name name) {

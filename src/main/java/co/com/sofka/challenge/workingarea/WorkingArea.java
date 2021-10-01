@@ -135,8 +135,20 @@ public class WorkingArea extends AggregateEvent<WorkingAreaId> {
     }
 
 
+    public void updateMachineDescription(UserGuide userGuide){
+        Objects.requireNonNull(userGuide);
+        appendChange(new MachineUserGuideUpdated(userGuide)).apply();
+    }
 
+    public void updateMachinePowerConsumption(PowerConsumption powerConsumption){
+        Objects.requireNonNull(powerConsumption);
+        appendChange(new MachinePowerConsumptionUpdated(powerConsumption)).apply();
+    }
 
+    public void updateNextMaintenanceDate(NextMaintenanceDate jobContract){
+        Objects.requireNonNull(jobContract);
+        appendChange(new MachineNextMaintenanceDateUpdated(jobContract)).apply();
+    }
 
 
 

@@ -81,9 +81,16 @@ public class QualityDepartment extends AggregateEvent<QualityDepartmentId> {
         appendChange(new QualityReportGradeUpdated(qualityReportId, grade)).apply();
     }
 
-    public void updateQualityEstatuteName(EstatuteName estatuteName){
+    public void updateQualityEstatuteName(QualityEstatuteId qualityEstatuteId, EstatuteName estatuteName){
+        Objects.requireNonNull(qualityEstatuteId);
         Objects.requireNonNull(estatuteName);
-        appendChange(new QualityEstatuteNameUpdated(estatuteName)).apply();
+        appendChange(new QualityEstatuteNameUpdated(qualityEstatuteId, estatuteName)).apply();
+    }
+
+    public void updateQualityEstatuteDescription(QualityEstatuteId qualityEstatuteId, EstatuteDescription estatuteDescription){
+        Objects.requireNonNull(qualityEstatuteId);
+        Objects.requireNonNull(estatuteDescription);
+        appendChange(new QualityEstatuteDescriptionUpdated(qualityEstatuteId, estatuteDescription)).apply();
     }
 
     public void createJobCapacitation(JobCapacitationId jobCapacitationId, WorkingAreaId workingAreaId, CapacitationSubject capacitationSubject, CapacitationInfo capacitationInfo){

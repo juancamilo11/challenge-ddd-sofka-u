@@ -148,7 +148,6 @@ public class WorkingArea extends AggregateEvent<WorkingAreaId> {
         appendChange(new MachineNextMaintenanceDateUpdated(jobContract)).apply();
     }
 
-
     public Location location() {
         return this.location;
     }

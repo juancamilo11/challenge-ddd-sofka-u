@@ -106,6 +106,28 @@ public class QualityDepartmentChange extends EventChange {
             qualityReport.updateGrade(event.getGrade());
         });
 
+        apply((QualityEstatuteNameUpdated event) -> {
+            if(qualityDepartment.qualityEstatuteList == null || qualityDepartment.qualityEstatuteList.isEmpty()) {
+                throw new IllegalArgumentException("There're not any quality estatute for updating its name");
+            }
+            if(qualityDepartment.getQualityEstatuteById(event.getQualityEstatuteId()).isEmpty()){
+                throw new IllegalArgumentException("The quality estatute was not found in the list");
+            }
+            var qualityEstatute = qualityDepartment.getQualityEstatuteById(event.getQualityEstatuteId()).orElseThrow();
+            qualityEstatute.updateEstatuteName(event.getEstatuteName());
+        });
+
+        apply((QualityEstatuteDescriptionUpdated event) -> {
+            if(qualityDepartment.qualityEstatuteList == null || qualityDepartment.qualityEstatuteList.isEmpty()) {
+                throw new IllegalArgumentException("There're not any quality estatute for updating its description");
+            }
+            if(qualityDepartment.getQualityEstatuteById(event.getQualityEstatuteId()).isEmpty()){
+                throw new IllegalArgumentException("The quality estatute was not found in the list");
+            }
+            var qualityEstatute = qualityDepartment.getQualityEstatuteById(event.getQualityEstatuteId()).orElseThrow();
+            qualityEstatute.updateEstatuteDescription(event.getEstatuteDescription());
+        });
+
         apply((JobCapacitationCreated event) -> qualityDepartment.jobCapacitation = new JobCapacitation(event.getJobCapacitationId() , event.getWorkingAreaId() , event.getCapacitationSubject() , event.getCapacitationInfo() ));
 
         apply((JobCapacitationWorkingAreaIdUpdated event) -> qualityDepartment.jobCapacitation.updateWorkingAreaId(event.getWorkingAreaId()));

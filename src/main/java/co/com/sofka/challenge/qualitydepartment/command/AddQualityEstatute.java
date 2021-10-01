@@ -1,17 +1,19 @@
-package co.com.sofka.challenge.qualitydepartment.event;
+package co.com.sofka.challenge.qualitydepartment.command;
 
 import co.com.sofka.challenge.qualitydepartment.value.EstatuteDescription;
+import co.com.sofka.challenge.qualitydepartment.value.EstatuteName;
 import co.com.sofka.challenge.qualitydepartment.value.QualityEstatuteId;
-import co.com.sofka.domain.generic.DomainEvent;
+import co.com.sofka.domain.generic.Command;
 
-public class QualityEstatuteDescriptionUpdated extends DomainEvent {
+public class AddQualityEstatute extends Command {
 
-    QualityEstatuteId qualityEstatuteId;
+    private QualityEstatuteId qualityEstatuteId;
+    private EstatuteName estatuteName;
     private EstatuteDescription estatuteDescription;
 
-    public QualityEstatuteDescriptionUpdated(QualityEstatuteId qualityEstatuteId, EstatuteDescription estatuteDescription) {
-        super("sofka.qualitydepartment.qualityestatutedescriptionupdated");
+    public AddQualityEstatute(QualityEstatuteId qualityEstatuteId, EstatuteName estatuteName, EstatuteDescription estatuteDescription) {
         this.qualityEstatuteId = qualityEstatuteId;
+        this.estatuteName = estatuteName;
         this.estatuteDescription = estatuteDescription;
     }
 
@@ -23,8 +25,16 @@ public class QualityEstatuteDescriptionUpdated extends DomainEvent {
         this.qualityEstatuteId = qualityEstatuteId;
     }
 
+    public EstatuteName getEstatuteName() {
+        return estatuteName;
+    }
+
+    public void setEstatuteName(EstatuteName estatuteName) {
+        this.estatuteName = estatuteName;
+    }
+
     public EstatuteDescription getEstatuteDescription() {
-        return this.estatuteDescription;
+        return estatuteDescription;
     }
 
     public void setEstatuteDescription(EstatuteDescription estatuteDescription) {

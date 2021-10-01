@@ -14,6 +14,7 @@ import co.com.sofka.domain.generic.AggregateEvent;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 public class WorkingArea extends AggregateEvent<WorkingAreaId> {
 
@@ -45,7 +46,7 @@ public class WorkingArea extends AggregateEvent<WorkingAreaId> {
         appendChange(new SewingMachineAdded(sewingMachineId, userGuide, powerConsumption)).apply();
     }
 
-    public void addEmployee(RawMaterialProviderId rawMaterialProviderId, Name name, PhoneNumber phoneNumber,TypeOfMaterial typeOfMaterial){
+    public void addRawMaterialProvider(RawMaterialProviderId rawMaterialProviderId, Name name, PhoneNumber phoneNumber,TypeOfMaterial typeOfMaterial){
         Objects.requireNonNull(rawMaterialProviderId);
         Objects.requireNonNull(name);
         Objects.requireNonNull(phoneNumber);
@@ -53,30 +54,55 @@ public class WorkingArea extends AggregateEvent<WorkingAreaId> {
         appendChange(new RawMaterialProviderAdded(rawMaterialProviderId, name, phoneNumber, typeOfMaterial)).apply();
     }
 
+    public Optional<Employee> getEmployeeById(EmployeeId employeeId){
+        return this.employeeList
+                .stream()
+                .filter(employee -> employee.identity().equals(employeeId))
+                .findFirst();
+    }
+
+    public Optional<SewingMachine> getSewingMachineById(SewingMachineId sewingMachineId){
+        return this.sewingMachineList
+                .stream()
+                .filter(employee -> employee.identity().equals(sewingMachineId))
+                .findFirst();
+    }
+
+    public Optional<RawMaterialProvider> getRawMaterialProviderById(RawMaterialProviderId rawMaterialProviderId){
+        return this.rawMaterialProviderList
+                .stream()
+                .filter(employee -> employee.identity().equals(rawMaterialProviderId))
+                .findFirst();
+    }
 
 
 
-    public TypeOfMaterial getTypeOfMaterial() {
+
+
+
+
+
+    public TypeOfMaterial typeOfMaterial() {
         return this.typeOfMaterial;
     }
 
-    public Location getLocation() {
+    public Location location() {
         return this.location;
     }
 
-    public WorkingTime getWorkingTime() {
+    public WorkingTime workingTime() {
         return this.workingTime;
     }
 
-    public List<Employee> getEmployeeList() {
+    public List<Employee> employeeList() {
         return this.employeeList;
     }
 
-    public List<SewingMachine> getSewingMachineList() {
+    public List<SewingMachine> sewingMachineList() {
         return this.sewingMachineList;
     }
 
-    public List<RawMaterialProvider> getRawMaterialProviderList() {
+    public List<RawMaterialProvider> rawMaterialProviderList() {
         return this.rawMaterialProviderList;
     }
 }

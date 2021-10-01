@@ -57,7 +57,6 @@ public class WorkingArea extends AggregateEvent<WorkingAreaId> {
         appendChange(new RawMaterialProviderAdded(rawMaterialProviderId, name, phoneNumber, typeOfMaterial)).apply();
     }
 
-
     public Optional<Employee> getEmployeeById(EmployeeId employeeId){
         return this.employeeList
                 .stream()

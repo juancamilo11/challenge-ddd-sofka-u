@@ -105,10 +105,11 @@ public class QualityDepartment extends AggregateEvent<QualityDepartmentId> {
         Objects.requireNonNull(workingAreaId);
         appendChange(new JobCapacitationWorkingAreaIdUpdated(workingAreaId)).apply();
     }
-
-    public void updateJobCapacitationSubject(CapacitationSubject capacitationSubject){
+    //checking
+    public void updateJobCapacitationSubject(JobCapacitationId jobCapacitationId, CapacitationSubject capacitationSubject){
+        Objects.requireNonNull(jobCapacitationId);
         Objects.requireNonNull(capacitationSubject);
-        appendChange(new JobCapacitationSubjectUpdated(capacitationSubject)).apply();
+        appendChange(new JobCapacitationSubjectUpdated(jobCapacitationId, capacitationSubject)).apply();
     }
 
     public void updateJobCapacitationInfo(CapacitationInfo capacitationInfo){

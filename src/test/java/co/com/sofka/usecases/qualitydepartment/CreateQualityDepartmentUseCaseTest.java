@@ -37,5 +37,4 @@ class CreateQualityDepartmentUseCaseTest {
 
         Assertions.assertEquals("juan.cadona@gmail.com", event.getEmail().value());
     }
-
 }

@@ -4,20 +4,31 @@ import co.com.sofka.domain.generic.Command;
 import co.com.sofka.domain.workingarea.entity.SewingMachine;
 import co.com.sofka.domain.workingarea.value.Location;
 import co.com.sofka.domain.workingarea.value.TypeOfMaterial;
+import co.com.sofka.domain.workingarea.value.WorkingAreaId;
 import co.com.sofka.domain.workingarea.value.WorkingTime;
 
 public class CreateWorkingArea extends Command {
 
+    private WorkingAreaId workingAreaId;
     private TypeOfMaterial typeOfMaterial;
     private Location location;
     private WorkingTime workingTime;
     private SewingMachine sewingMachine;
 
-    public CreateWorkingArea(TypeOfMaterial typeOfMaterial, Location location, WorkingTime workingTime, SewingMachine sewingMachine) {
+    public CreateWorkingArea(WorkingAreaId workingAreaId, TypeOfMaterial typeOfMaterial, Location location, WorkingTime workingTime, SewingMachine sewingMachine) {
+        this.workingAreaId = workingAreaId;
         this.typeOfMaterial = typeOfMaterial;
         this.location = location;
         this.workingTime = workingTime;
         this.sewingMachine = sewingMachine;
+    }
+
+    public WorkingAreaId getWorkingAreaId() {
+        return workingAreaId;
+    }
+
+    public void setWorkingAreaId(WorkingAreaId workingAreaId) {
+        this.workingAreaId = workingAreaId;
     }
 
     public TypeOfMaterial getTypeOfMaterial() {

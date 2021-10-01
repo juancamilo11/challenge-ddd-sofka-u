@@ -27,7 +27,7 @@ public class WorkingArea extends AggregateEvent<WorkingAreaId> {
 
     public WorkingArea(WorkingAreaId workingAreaId,TypeOfMaterial typeOfMaterial , Location location, WorkingTime workingTime, SewingMachine sewingMachine) {
         super(workingAreaId);
-        appendChange(new WorkingAreaCreated(typeOfMaterial, location, workingTime, sewingMachine)).apply();
+        appendChange(new WorkingAreaCreated( workingAreaId, typeOfMaterial, location, workingTime, sewingMachine)).apply();
     }
 
     private WorkingArea(WorkingAreaId workingAreaId){

@@ -3,17 +3,20 @@ package co.com.sofka.challenge.qualitydepartment.event;
 import co.com.sofka.challenge.qualitydepartment.value.Grade;
 import co.com.sofka.challenge.qualitydepartment.value.QualityReportId;
 import co.com.sofka.challenge.qualitydepartment.value.ReportDescription;
+import co.com.sofka.challenge.workingarea.value.WorkingAreaId;
 import co.com.sofka.domain.generic.DomainEvent;
 
 public class QualityReportAdded extends DomainEvent {
 
+    private WorkingAreaId workingAreaId;
     private QualityReportId qualityReportId;
     private ReportDescription reportDescription;
     private Grade grade;
 
-    public QualityReportAdded(QualityReportId qualityReportId, ReportDescription reportDescription, Grade grade) {
+    public QualityReportAdded(QualityReportId qualityReportId, WorkingAreaId workingAreaId, ReportDescription reportDescription, Grade grade) {
         super("sofka.qualitydepartment.qualityreportadded");
         this.qualityReportId = qualityReportId;
+        this.workingAreaId = workingAreaId;
         this.reportDescription = reportDescription;
         this.grade = grade;
     }
@@ -24,6 +27,14 @@ public class QualityReportAdded extends DomainEvent {
 
     public void setQualityReportId(QualityReportId qualityReportId) {
         this.qualityReportId = qualityReportId;
+    }
+
+    public WorkingAreaId getWorkingAreaId() {
+        return this.workingAreaId;
+    }
+
+    public void setWorkingAreaId(WorkingAreaId workingAreaId) {
+        this.workingAreaId = workingAreaId;
     }
 
     public ReportDescription getReportDescription() {

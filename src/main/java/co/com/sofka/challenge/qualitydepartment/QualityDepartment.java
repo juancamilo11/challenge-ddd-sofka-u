@@ -11,21 +11,20 @@ import co.com.sofka.domain.generic.DomainEvent;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class QualityDepartment extends AggregateEvent<QualityDepartmentId> {
 
     protected OfficeNumber officeNumber;
     protected Email email;
-    protected List<WorkingAreaId> workingAreaIdList;
+    protected WorkingAreaId workingAreaId;
 
     protected List<QualityReport> qualityReportList;
     protected List<QualityEstatute> qualityEstatuteList;
     protected JobCapacitation jobCapacitation;
 
-    public QualityDepartment(QualityDepartmentId qualityDepartmentId, OfficeNumber officeNumber, Email email, List<WorkingAreaId> workingAreaIdList) {
+    public QualityDepartment(QualityDepartmentId qualityDepartmentId, OfficeNumber officeNumber, Email email, WorkingAreaId workingAreaId) {
         super(qualityDepartmentId);
-        appendChange(new QualityDepartmentCreated(officeNumber, email, workingAreaIdList)).apply();
+        appendChange(new QualityDepartmentCreated(officeNumber, email, workingAreaId)).apply();
     }
 
     private QualityDepartment(QualityDepartmentId qualityDepartmentId){
@@ -44,7 +43,7 @@ public class QualityDepartment extends AggregateEvent<QualityDepartmentId> {
         Objects.requireNonNull(workingAreaId);
         Objects.requireNonNull(reportDescription);
         Objects.requireNonNull(grade);
-        appendChange(new QualityReportAdded(qualityReportId, reportDescription, grade)).apply();
+        appendChange(new QualityReportAdded(qualityReportId, workingAreaId,reportDescription, grade)).apply();
     }
 
     public void addQualityEstatute(QualityEstatuteId qualityEstatuteId, EstatuteName estatuteName, EstatuteDescription estatuteDescription){
@@ -64,19 +63,35 @@ public class QualityDepartment extends AggregateEvent<QualityDepartmentId> {
         appendChange(new QualityEstatuteDeleted(qualityEstatuteId)).apply();
     }
 
-    public void updateQualityReportWorkingAreaId(WorkingAreaId WorkingAreaId){
-        Objects.requireNonNull(WorkingAreaId);
-        appendChange(new QualityReportWorkingAreaIdUpdated(WorkingAreaId)).apply();
+    public void updateQualityReportWorkingAreaId(QualityReportId qualityReportId, WorkingAreaId workingAreaId){
+        Objects.requireNonNull(qualityReportId);
+        Objects.requireNonNull(workingAreaId);
+        appendChange(new QualityReportWorkingAreaIdUpdated(qualityReportId, workingAreaId)).apply();
     }
 
-    public void updateQualityReportDescription(ReportDescription reportDescription){
+    public void updateQualityReportDescription(QualityReportId qualityReportId, ReportDescription reportDescription){
+        Objects.requireNonNull(qualityReportId);
         Objects.requireNonNull(reportDescription);
-        appendChange(new QualityReportDescriptionUpdated(reportDescription)).apply();
+        appendChange(new QualityReportDescriptionUpdated(qualityReportId, reportDescription)).apply();
     }
 
-    public void updateQualityReportGrade(Grade grade){
+    public void updateQualityReportGrade(QualityReportId qualityReportId,Grade grade){
+        Objects.requireNonNull(qualityReportId);
         Objects.requireNonNull(grade);
-        appendChange(new QualityReportGradeUpdated(grade)).apply();
+        appendChange(new QualityReportGradeUpdated(qualityReportId, grade)).apply();
+    }
+
+    public void updateQualityEstatuteName(EstatuteName estatuteName){
+        Objects.requireNonNull(estatuteName);
+        appendChange(new QualityEstatuteNameUpdated(estatuteName)).apply();
+    }
+
+    public void createJobCapacitation(JobCapacitationId jobCapacitationId, WorkingAreaId workingAreaId, CapacitationSubject capacitationSubject, CapacitationInfo capacitationInfo){
+        Objects.requireNonNull(jobCapacitationId);
+        Objects.requireNonNull(workingAreaId);
+        Objects.requireNonNull(capacitationSubject);
+        Objects.requireNonNull(capacitationInfo);
+        appendChange(new JobCapacitationCreated(jobCapacitationId, workingAreaId, capacitationSubject, capacitationInfo)).apply();
     }
 
     public void updateJobCapacitationWorkingAreaId(WorkingAreaId workingAreaId){
@@ -89,21 +104,18 @@ public class QualityDepartment extends AggregateEvent<QualityDepartmentId> {
         appendChange(new JobCapacitationSubjectUpdated(capacitationSubject)).apply();
     }
 
-    public void updateQualityEstatuteName(EstatuteName estatuteName){
-        Objects.requireNonNull(estatuteName);
-        appendChange(new QualityEstatuteNameUpdated(estatuteName)).apply();
+    public void updateJobCapacitationInfo(CapacitationInfo capacitationInfo){
+        Objects.requireNonNull(capacitationInfo);
+        appendChange(new JobCapacitationInfoUpdated(capacitationInfo)).apply();
     }
 
-    public Optional<List<QualityReport>> getQualityReportByAreaId(WorkingAreaId workingAreaId){
+    public Optional<QualityReport> getQualityReportById(QualityReportId qualityReportId){
         Objects.requireNonNull(workingAreaId);
-        return Optional.of(
-                this.qualityReportList
+        return this.qualityReportList
                 .stream()
                 .filter(qualityReport -> qualityReport
-                        .workingAreaId()
-                        .value()
-                        .equals(workingAreaId.value()))
-                .collect(Collectors.toList()));
+                        .identity()
+                        .equals(qualityReportId)).findFirst();
     }
 
     public Optional<QualityEstatute> getQualityEstatuteById(QualityEstatuteId qualityEstatuteId){
@@ -116,6 +128,21 @@ public class QualityDepartment extends AggregateEvent<QualityDepartmentId> {
                 .findFirst();
     }
 
+    public void updateOfficeNumber(OfficeNumber officeNumber){
+        Objects.requireNonNull(officeNumber);
+        appendChange(new OfficeNumberUpdated(officeNumber)).apply();
+    }
+
+    public void updateEmail(Email email){
+        Objects.requireNonNull(email);
+        appendChange(new EmailUpdated(email)).apply();
+    }
+
+    public void updateWorkingAreaId(WorkingAreaId workingAreaId){
+        Objects.requireNonNull(workingAreaId);
+        appendChange(new WorkingAreaIdUpdated(workingAreaId)).apply();
+    }
+
     public OfficeNumber officeNumber() {
         return this.officeNumber;
     }
@@ -124,8 +151,8 @@ public class QualityDepartment extends AggregateEvent<QualityDepartmentId> {
         return this.email;
     }
 
-    public List<WorkingAreaId> workingAreaIdList() {
-        return this.workingAreaIdList;
+    public WorkingAreaId workingAreaIdList() {
+        return this.workingAreaId;
     }
 
     public List<QualityReport> qualityReportList() {

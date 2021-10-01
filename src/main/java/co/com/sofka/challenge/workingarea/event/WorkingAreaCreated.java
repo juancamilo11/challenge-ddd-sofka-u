@@ -1,5 +1,6 @@
 package co.com.sofka.challenge.workingarea.event;
 
+import co.com.sofka.challenge.workingarea.entity.SewingMachine;
 import co.com.sofka.challenge.workingarea.value.Location;
 import co.com.sofka.challenge.workingarea.value.TypeOfMaterial;
 import co.com.sofka.challenge.workingarea.value.WorkingTime;
@@ -10,12 +11,14 @@ public class WorkingAreaCreated extends DomainEvent {
     private TypeOfMaterial typeOfMaterial;
     private Location location;
     private WorkingTime workingTime;
+    private SewingMachine sewingMachine;
 
-    public WorkingAreaCreated(TypeOfMaterial typeOfMaterial, Location location, WorkingTime workingTime) {
+    public WorkingAreaCreated(TypeOfMaterial typeOfMaterial, Location location, WorkingTime workingTime, SewingMachine sewingMachine) {
         super("sofka.workingarea.workingareacreated");
         this.typeOfMaterial = typeOfMaterial;
         this.location = location;
         this.workingTime = workingTime;
+        this.sewingMachine = sewingMachine;
     }
 
     public TypeOfMaterial getTypeOfMaterial() {
@@ -40,5 +43,13 @@ public class WorkingAreaCreated extends DomainEvent {
 
     public void setWorkingTime(WorkingTime workingTime) {
         this.workingTime = workingTime;
+    }
+
+    public SewingMachine getSewingMachine() {
+        return this.sewingMachine;
+    }
+
+    public void setSewingMachine(SewingMachine sewingMachine) {
+        this.sewingMachine = sewingMachine;
     }
 }

@@ -16,18 +16,18 @@ import java.util.Optional;
 
 public class WorkingArea extends AggregateEvent<WorkingAreaId> {
 
-    private TypeOfMaterial typeOfMaterial;
-    private Location location;
-    private WorkingTime workingTime;
+    protected TypeOfMaterial typeOfMaterial;
+    protected Location location;
+    protected WorkingTime workingTime;
+    protected SewingMachine sewingMachine;
 
-    private List<Employee> employeeList;
-    private List<SewingMachine> sewingMachineList;
-    private List<RawMaterialProvider> rawMaterialProviderList;
+    protected List<Employee> employeeList;
 
+    protected List<RawMaterialProvider> rawMaterialProviderList;
 
-    public WorkingArea(WorkingAreaId workingAreaId,TypeOfMaterial typeOfMaterial , Location location, WorkingTime workingTime) {
+    public WorkingArea(WorkingAreaId workingAreaId,TypeOfMaterial typeOfMaterial , Location location, WorkingTime workingTime, SewingMachine sewingMachine) {
         super(workingAreaId);
-        appendChange(new WorkingAreaCreated(typeOfMaterial, location, workingTime)).apply();
+        appendChange(new WorkingAreaCreated(typeOfMaterial, location, workingTime, sewingMachine)).apply();
     }
 
     private WorkingArea(WorkingAreaId workingAreaId){
@@ -49,13 +49,6 @@ public class WorkingArea extends AggregateEvent<WorkingAreaId> {
         appendChange(new EmployeeAdded(employeeId, name, phoneNumber, jobContract)).apply();
     }
 
-    public void addSewingMachine(SewingMachineId sewingMachineId, UserGuide userGuide, PowerConsumption powerConsumption){
-        Objects.requireNonNull(sewingMachineId);
-        Objects.requireNonNull(userGuide);
-        Objects.requireNonNull(powerConsumption);
-        appendChange(new SewingMachineAdded(sewingMachineId, userGuide, powerConsumption)).apply();
-    }
-
     public void addRawMaterialProvider(RawMaterialProviderId rawMaterialProviderId, Name name, PhoneNumber phoneNumber,TypeOfMaterial typeOfMaterial){
         Objects.requireNonNull(rawMaterialProviderId);
         Objects.requireNonNull(name);
@@ -72,13 +65,6 @@ public class WorkingArea extends AggregateEvent<WorkingAreaId> {
                 .findFirst();
     }
 
-    public Optional<SewingMachine> getSewingMachineById(SewingMachineId sewingMachineId){
-        return this.sewingMachineList
-                .stream()
-                .filter(employee -> employee.identity().equals(sewingMachineId))
-                .findFirst();
-    }
-
     public Optional<RawMaterialProvider> getRawMaterialProviderById(RawMaterialProviderId rawMaterialProviderId){
         return this.rawMaterialProviderList
                 .stream()
@@ -89,11 +75,6 @@ public class WorkingArea extends AggregateEvent<WorkingAreaId> {
     public void deleteEmployee(EmployeeId employeeId){
         Objects.requireNonNull(employeeId);
         appendChange(new EmployeeDeleted(employeeId)).apply();
-    }
-
-    public void deleteSewingMachine(SewingMachineId sewingMachineId){
-        Objects.requireNonNull(sewingMachineId);
-        appendChange(new SewingMachineDeleted(sewingMachineId)).apply();
     }
 
     public void deleteRawMaterialProvider(RawMaterialProviderId rawMaterialProviderId){
@@ -111,9 +92,10 @@ public class WorkingArea extends AggregateEvent<WorkingAreaId> {
         appendChange(new EmployeeOrderedToTopWorking(employeeId)).apply();
     }
 
-    public void updateTypeOfMaterial(TypeOfMaterial typeOfMaterial){
+    public void updateTypeOfMaterial(RawMaterialProviderId rawMaterialProviderId, TypeOfMaterial typeOfMaterial){
+        Objects.requireNonNull(rawMaterialProviderId);
         Objects.requireNonNull(typeOfMaterial);
-        appendChange(new TypeOfMaterialUpdated(typeOfMaterial)).apply();
+        appendChange(new TypeOfMaterialUpdated(rawMaterialProviderId, typeOfMaterial)).apply();
     }
 
     public void updateLocation(Location location){
@@ -121,24 +103,34 @@ public class WorkingArea extends AggregateEvent<WorkingAreaId> {
         appendChange(new LocationUpdated(location)).apply();
     }
 
+    public void updateSewingMachine(SewingMachineId sewingMachineId, UserGuide userGuide, PowerConsumption powerConsumption){
+        Objects.requireNonNull(sewingMachineId);
+        Objects.requireNonNull(userGuide);
+        Objects.requireNonNull(powerConsumption);
+        appendChange(new SewingMachineUpdated(sewingMachineId, userGuide, powerConsumption)).apply();
+    }
+
     public void updateWorkingTime(WorkingTime workingTime){
         Objects.requireNonNull(workingTime);
         appendChange(new WorkingTimeUpdated(workingTime)).apply();
     }
 
-    public void updateEmployeeName(Name name){
+    public void updateEmployeeName(EmployeeId employeeId, Name name){
+        Objects.requireNonNull(employeeId);
         Objects.requireNonNull(name);
-        appendChange(new EmployeeNameUpdated(name)).apply();
+        appendChange(new EmployeeNameUpdated(employeeId, name)).apply();
     }
 
-    public void updateEmployeePhoneNumber(PhoneNumber phoneNumber){
+    public void updateEmployeePhoneNumber(EmployeeId employeeId, PhoneNumber phoneNumber){
+        Objects.requireNonNull(employeeId);
         Objects.requireNonNull(phoneNumber);
-        appendChange(new EmployeePhoneNumberUpdated(phoneNumber)).apply();
+        appendChange(new EmployeePhoneNumberUpdated(employeeId ,phoneNumber)).apply();
     }
 
-    public void updateEmployeeJobContract(JobContract jobContract){
+    public void updateEmployeeJobContract(EmployeeId employeeId, JobContract jobContract){
+        Objects.requireNonNull(employeeId);
         Objects.requireNonNull(jobContract);
-        appendChange(new EmployeeJobContractUpdated(jobContract)).apply();
+        appendChange(new EmployeeJobContractUpdated(employeeId ,jobContract)).apply();
     }
 
     public void updateMachineDescription(UserGuide userGuide){
@@ -156,6 +148,7 @@ public class WorkingArea extends AggregateEvent<WorkingAreaId> {
         appendChange(new MachineNextMaintenanceDateUpdated(jobContract)).apply();
     }
 
+
     public Location location() {
         return this.location;
     }
@@ -164,16 +157,14 @@ public class WorkingArea extends AggregateEvent<WorkingAreaId> {
         return this.workingTime;
     }
 
+    public SewingMachine sewingMachine() { return sewingMachine; }
+
     public List<Employee> employeeList() {
         return this.employeeList;
     }
 
     public TypeOfMaterial typeOfMaterial() {
         return this.typeOfMaterial;
-    }
-
-    public List<SewingMachine> sewingMachineList() {
-        return this.sewingMachineList;
     }
 
     public List<RawMaterialProvider> rawMaterialProviderList() {

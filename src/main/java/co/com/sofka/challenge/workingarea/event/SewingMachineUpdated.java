@@ -5,14 +5,14 @@ import co.com.sofka.challenge.workingarea.value.SewingMachineId;
 import co.com.sofka.challenge.workingarea.value.UserGuide;
 import co.com.sofka.domain.generic.DomainEvent;
 
-public class SewingMachineAdded extends DomainEvent {
+public class SewingMachineUpdated extends DomainEvent {
 
     private SewingMachineId sewingMachineId;
     private UserGuide userGuide;
     private PowerConsumption powerConsumption;
 
-    public SewingMachineAdded(SewingMachineId sewingMachineId, UserGuide userGuide, PowerConsumption powerConsumption) {
-        super("sofka.workingarea.sewingmachineadded");
+    public SewingMachineUpdated(SewingMachineId sewingMachineId, UserGuide userGuide, PowerConsumption powerConsumption) {
+        super("sofka.workingarea.sewingmachineupdated");
         this.sewingMachineId = sewingMachineId;
         this.userGuide = userGuide;
         this.powerConsumption = powerConsumption;

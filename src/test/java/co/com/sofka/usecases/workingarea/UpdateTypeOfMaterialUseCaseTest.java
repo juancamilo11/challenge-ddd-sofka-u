@@ -41,7 +41,7 @@ class UpdateTypeOfMaterialUseCaseTest {
                 new UserGuide(Set.of("arrancar","presionar la palanca","apagar")),
                 new PowerConsumption(1.200,"KW"));
 
-        Mockito.when(domainEventRepository.getEventsBy(ROOT_ID)).thenReturn(List.of( new WorkingAreaCreated(WorkingAreaId.of("843NFEC8C"),
+        Mockito.when(domainEventRepository.getEventsBy(ROOT_ID)).thenReturn(List.of( new WorkingAreaCreated(WorkingAreaId.of(ROOT_ID),
                         new TypeOfMaterial("Algodon"),
                         new Location("Zona este"),
                         new WorkingTime("L-V;8am-5pm"),

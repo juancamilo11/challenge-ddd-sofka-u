@@ -7,7 +7,7 @@ import co.com.sofka.domain.workingarea.WorkingArea;
 import co.com.sofka.domain.workingarea.event.NotificationDisplayedForChangeOfWorkingTime;
 import co.com.sofka.domain.workingarea.value.WorkingAreaId;
 
-public class notifyChangingOfWorkingTimeUseCase extends UseCase<TriggeredEvent<NotificationDisplayedForChangeOfWorkingTime>, ResponseEvents> {
+public class NotifyChangingOfWorkingTimeUseCase extends UseCase<TriggeredEvent<NotificationDisplayedForChangeOfWorkingTime>, ResponseEvents> {
 
     private final static String message = "Heads up! The working time has been changed!";
 

@@ -16,7 +16,9 @@ public class CreateJobCapacitation extends Command {
     private CapacitationSubject capacitationSubject;
     private CapacitationInfo capacitationInfo;
 
-    public CreateJobCapacitation(QualityDepartmentId qualityDepartmentId, JobCapacitationId jobCapacitationId, WorkingAreaId workingAreaId, CapacitationSubject capacitationSubject, CapacitationInfo capacitationInfo) {
+    public CreateJobCapacitation(QualityDepartmentId qualityDepartmentId, JobCapacitationId jobCapacitationId,
+                                 WorkingAreaId workingAreaId, CapacitationSubject capacitationSubject,
+                                 CapacitationInfo capacitationInfo) {
         this.qualityDepartmentId = qualityDepartmentId;
         this.jobCapacitationId = jobCapacitationId;
         this.workingAreaId = workingAreaId;

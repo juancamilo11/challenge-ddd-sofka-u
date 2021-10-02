@@ -4,7 +4,6 @@ import co.com.sofka.business.generic.UseCase;
 import co.com.sofka.business.support.RequestCommand;
 import co.com.sofka.business.support.ResponseEvents;
 import co.com.sofka.domain.workingarea.WorkingArea;
-import co.com.sofka.domain.workingarea.command.UpdateLocation;
 import co.com.sofka.domain.workingarea.command.UpdateTypeOfMaterial;
 
 public class UpdateTypeOfMaterialUseCase extends UseCase<RequestCommand<UpdateTypeOfMaterial>, ResponseEvents> {

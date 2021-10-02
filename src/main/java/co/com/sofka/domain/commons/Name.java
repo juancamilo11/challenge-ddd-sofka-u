@@ -11,7 +11,7 @@ public class Name implements ValueObject<String> {
     public Name(String value){
         Objects.requireNonNull(value,"Name for the employee cannot be null");
         if(value.trim().isBlank())  throw new IllegalArgumentException("Name for the employee cannot be blank");
-        if(!value.matches("[a-zA-Z'-]{4,50}"))  throw new IllegalArgumentException("Name for the employee must have more than 3 chars");
+        if(value.length() < 3)  throw new IllegalArgumentException("Name for the employee must have more than 3 chars");
         this.name = value;
     }
 

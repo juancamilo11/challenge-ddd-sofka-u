@@ -4,17 +4,24 @@ import co.com.sofka.domain.workingarea.value.PowerConsumption;
 import co.com.sofka.domain.workingarea.value.SewingMachineId;
 import co.com.sofka.domain.workingarea.value.UserGuide;
 import co.com.sofka.domain.generic.Command;
+import co.com.sofka.domain.workingarea.value.WorkingAreaId;
 
 public class UpdateSewingMachine extends Command {
 
+    private WorkingAreaId workingAreaId;
     private SewingMachineId sewingMachineId;
     private UserGuide userGuide;
     private PowerConsumption powerConsumption;
 
-    public UpdateSewingMachine(SewingMachineId sewingMachineId, UserGuide userGuide, PowerConsumption powerConsumption) {
+    public UpdateSewingMachine(WorkingAreaId workingAreaId, SewingMachineId sewingMachineId, UserGuide userGuide, PowerConsumption powerConsumption) {
+        this.workingAreaId = workingAreaId;
         this.sewingMachineId = sewingMachineId;
         this.userGuide = userGuide;
         this.powerConsumption = powerConsumption;
+    }
+
+    public WorkingAreaId getWorkingAreaId() {
+        return workingAreaId;
     }
 
     public SewingMachineId getSewingMachineId() {

@@ -5,50 +5,45 @@ import co.com.sofka.domain.commons.PhoneNumber;
 import co.com.sofka.domain.workingarea.value.EmployeeId;
 import co.com.sofka.domain.workingarea.value.JobContract;
 import co.com.sofka.domain.generic.Command;
+import co.com.sofka.domain.workingarea.value.WorkingAreaId;
 
 public class AddEmployee extends Command {
 
+    private WorkingAreaId workingAreaId;
     private EmployeeId employeeId;
     private Name name;
     private PhoneNumber phoneNumber;
     private JobContract jobContract;
 
-    public AddEmployee(EmployeeId employeeId, Name name, PhoneNumber phoneNumber, JobContract jobContract) {
+    public AddEmployee(WorkingAreaId workingAreaId, EmployeeId employeeId, Name name, PhoneNumber phoneNumber, JobContract jobContract) {
+        this.workingAreaId = workingAreaId;
         this.employeeId = employeeId;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.jobContract = jobContract;
+    }
+
+    public WorkingAreaId getWorkingAreaId() {
+        return workingAreaId;
     }
 
     public EmployeeId getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(EmployeeId employeeId) {
-        this.employeeId = employeeId;
-    }
 
     public Name getName() {
         return name;
     }
 
-    public void setName(Name name) {
-        this.name = name;
-    }
 
     public PhoneNumber getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(PhoneNumber phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
 
     public JobContract getJobContract() {
         return jobContract;
     }
 
-    public void setJobContract(JobContract jobContract) {
-        this.jobContract = jobContract;
-    }
 }

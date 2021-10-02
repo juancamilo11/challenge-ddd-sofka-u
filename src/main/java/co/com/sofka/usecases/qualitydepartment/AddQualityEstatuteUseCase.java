@@ -5,9 +5,6 @@ import co.com.sofka.business.support.RequestCommand;
 import co.com.sofka.business.support.ResponseEvents;
 import co.com.sofka.domain.qualitydepartment.QualityDepartment;
 import co.com.sofka.domain.qualitydepartment.command.AddQualityEstatute;
-import co.com.sofka.domain.qualitydepartment.command.AddQualityReport;
-import co.com.sofka.domain.workingarea.WorkingArea;
-import co.com.sofka.domain.workingarea.command.AddEmployee;
 
 public class AddQualityEstatuteUseCase extends UseCase<RequestCommand<AddQualityEstatute>, ResponseEvents> {
 

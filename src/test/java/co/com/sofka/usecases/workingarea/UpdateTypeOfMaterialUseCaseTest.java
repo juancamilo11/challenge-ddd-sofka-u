@@ -5,7 +5,6 @@ import co.com.sofka.business.repository.DomainEventRepository;
 import co.com.sofka.business.support.RequestCommand;
 import co.com.sofka.domain.workingarea.command.UpdateTypeOfMaterial;
 import co.com.sofka.domain.workingarea.entity.SewingMachine;
-import co.com.sofka.domain.workingarea.event.RawMaterialProviderAdded;
 import co.com.sofka.domain.workingarea.event.TypeOfMaterialUpdated;
 import co.com.sofka.domain.workingarea.event.WorkingAreaCreated;
 import co.com.sofka.domain.workingarea.value.*;

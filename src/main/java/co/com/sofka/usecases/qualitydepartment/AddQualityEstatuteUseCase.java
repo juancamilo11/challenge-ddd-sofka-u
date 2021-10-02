@@ -4,18 +4,20 @@ import co.com.sofka.business.generic.UseCase;
 import co.com.sofka.business.support.RequestCommand;
 import co.com.sofka.business.support.ResponseEvents;
 import co.com.sofka.domain.qualitydepartment.QualityDepartment;
+import co.com.sofka.domain.qualitydepartment.command.AddQualityEstatute;
 import co.com.sofka.domain.qualitydepartment.command.AddQualityReport;
 import co.com.sofka.domain.workingarea.WorkingArea;
 import co.com.sofka.domain.workingarea.command.AddEmployee;
 
-public class AddQualityEstatuteUseCase extends UseCase<RequestCommand<AddQualityReport>, ResponseEvents> {
+public class AddQualityEstatuteUseCase extends UseCase<RequestCommand<AddQualityEstatute>, ResponseEvents> {
+
     @Override
-    public void executeUseCase(RequestCommand<AddQualityReport> addQualityReportRequestCommand) {
-        var command = addQualityReportRequestCommand.getCommand();
-        var qualityDepartment = QualityDepartment.from(command., retrieveEvents(command.getWorkingAreaId().value()));
+    public void executeUseCase(RequestCommand<AddQualityEstatute> addQualityEstatuteRequestCommand) {
+        var command = addQualityEstatuteRequestCommand.getCommand();
+        var qualityDepartment = QualityDepartment.from(command.getQualityDepartmentId(), retrieveEvents(command.getQualityDepartmentId().value()));
 
-        workingArea.addEmployee(command.getEmployeeId(), command.getName(), command.getPhoneNumber(), command.getJobContract());
+        qualityDepartment.addQualityEstatute(command.getQualityEstatuteId(), command.getEstatuteName(), command.getEstatuteDescription());
 
-        emit().onResponse(new ResponseEvents(workingArea.getUncommittedChanges()));
+        emit().onResponse(new ResponseEvents(qualityDepartment.getUncommittedChanges()));
     }
 }

@@ -3,19 +3,20 @@ package co.com.sofka.domain.qualitydepartment.command;
 import co.com.sofka.domain.commons.Email;
 import co.com.sofka.domain.generic.Command;
 import co.com.sofka.domain.qualitydepartment.QualityDepartment;
+import co.com.sofka.domain.qualitydepartment.value.QualityDepartmentId;
 
 public class UpdateEmail extends Command {
 
-    private QualityDepartment qualityDepartment;
+    private QualityDepartmentId qualityDepartmentId;
     private Email email;
 
-    public UpdateEmail(QualityDepartment qualityDepartment, Email email) {
-        this.qualityDepartment = qualityDepartment;
+    public UpdateEmail(QualityDepartmentId qualityDepartmentId, Email email) {
+        this.qualityDepartmentId = qualityDepartmentId;
         this.email = email;
     }
 
-    public QualityDepartment getQualityDepartment() {
-        return qualityDepartment;
+    public QualityDepartmentId getQualityDepartmentId() {
+        return qualityDepartmentId;
     }
 
     public Email getEmail() {

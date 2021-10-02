@@ -41,6 +41,17 @@ public class WorkingArea extends AggregateEvent<WorkingAreaId> {
         return workingArea;
     }
 
+    public void notifyChangingLocation(String notification){
+        Objects.requireNonNull(notification,"Notification cannot be null");
+        appendChange(new NotificationDisplayedForChangeOfLocation(notification)).apply();
+    }
+
+    public void notifyChangingOfWorkingTime(String notification){
+        Objects.requireNonNull(notification,"Notification cannot be null");
+        appendChange(new NotificationDisplayedForChangeOfWorkingTime(notification)).apply();
+
+    }
+
     public void addEmployee(EmployeeId employeeId, Name name, PhoneNumber phoneNumber, JobContract jobContract){
         Objects.requireNonNull(employeeId);
         Objects.requireNonNull(name);

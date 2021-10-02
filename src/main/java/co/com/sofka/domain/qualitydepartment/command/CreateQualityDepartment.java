@@ -9,22 +9,16 @@ import co.com.sofka.domain.workingarea.value.WorkingAreaId;
 
 public class CreateQualityDepartment extends Command {
 
-    private QualityDepartment qualityDepartment;
     private QualityDepartmentId qualityDepartmentId;
     private OfficeNumber officeNumber;
     private Email email;
     private WorkingAreaId workingAreaId;
 
-    public CreateQualityDepartment(QualityDepartment qualityDepartment, QualityDepartmentId qualityDepartmentId, OfficeNumber officeNumber, Email email, WorkingAreaId workingAreaId) {
-        this.qualityDepartment = qualityDepartment;
+    public CreateQualityDepartment(QualityDepartmentId qualityDepartmentId, OfficeNumber officeNumber, Email email, WorkingAreaId workingAreaId) {
         this.qualityDepartmentId = qualityDepartmentId;
         this.officeNumber = officeNumber;
         this.email = email;
         this.workingAreaId = workingAreaId;
-    }
-
-    public QualityDepartment getQualityDepartment() {
-        return qualityDepartment;
     }
 
     public QualityDepartmentId getQualityDepartmentId() {

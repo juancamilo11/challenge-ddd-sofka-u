@@ -2,23 +2,24 @@ package co.com.sofka.domain.qualitydepartment.command;
 
 import co.com.sofka.domain.qualitydepartment.QualityDepartment;
 import co.com.sofka.domain.qualitydepartment.value.Grade;
+import co.com.sofka.domain.qualitydepartment.value.QualityDepartmentId;
 import co.com.sofka.domain.qualitydepartment.value.QualityReportId;
 import co.com.sofka.domain.generic.Command;
 
 public class UpdateQualityReportGrade extends Command {
 
-    private QualityDepartment qualityDepartment;
+    private QualityDepartmentId qualityDepartmentId;
     private QualityReportId qualityReportId;
     private Grade grade;
 
-    public UpdateQualityReportGrade(QualityDepartment qualityDepartment, QualityReportId qualityReportId, Grade grade) {
-        this.qualityDepartment = qualityDepartment;
+    public UpdateQualityReportGrade(QualityDepartmentId qualityDepartmentId, QualityReportId qualityReportId, Grade grade) {
+        this.qualityDepartmentId = qualityDepartmentId;
         this.qualityReportId = qualityReportId;
         this.grade = grade;
     }
 
-    public QualityDepartment getQualityDepartment() {
-        return qualityDepartment;
+    public QualityDepartmentId getQualityDepartmentId() {
+        return qualityDepartmentId;
     }
 
     public QualityReportId getQualityReportId() {

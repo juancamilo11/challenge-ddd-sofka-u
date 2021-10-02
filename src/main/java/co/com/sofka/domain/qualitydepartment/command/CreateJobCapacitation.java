@@ -4,27 +4,28 @@ import co.com.sofka.domain.qualitydepartment.QualityDepartment;
 import co.com.sofka.domain.qualitydepartment.value.CapacitationInfo;
 import co.com.sofka.domain.qualitydepartment.value.CapacitationSubject;
 import co.com.sofka.domain.qualitydepartment.value.JobCapacitationId;
+import co.com.sofka.domain.qualitydepartment.value.QualityDepartmentId;
 import co.com.sofka.domain.workingarea.value.WorkingAreaId;
 import co.com.sofka.domain.generic.Command;
 
 public class CreateJobCapacitation extends Command {
 
-    private QualityDepartment qualityDepartment;
+    private QualityDepartmentId qualityDepartmentId;
     private JobCapacitationId jobCapacitationId;
     private WorkingAreaId workingAreaId;
     private CapacitationSubject capacitationSubject;
     private CapacitationInfo capacitationInfo;
 
-    public CreateJobCapacitation(QualityDepartment qualityDepartment, JobCapacitationId jobCapacitationId, WorkingAreaId workingAreaId, CapacitationSubject capacitationSubject, CapacitationInfo capacitationInfo) {
-        this.qualityDepartment = qualityDepartment;
+    public CreateJobCapacitation(QualityDepartmentId qualityDepartmentId, JobCapacitationId jobCapacitationId, WorkingAreaId workingAreaId, CapacitationSubject capacitationSubject, CapacitationInfo capacitationInfo) {
+        this.qualityDepartmentId = qualityDepartmentId;
         this.jobCapacitationId = jobCapacitationId;
         this.workingAreaId = workingAreaId;
         this.capacitationSubject = capacitationSubject;
         this.capacitationInfo = capacitationInfo;
     }
 
-    public QualityDepartment getQualityDepartment() {
-        return qualityDepartment;
+    public QualityDepartmentId getQualityDepartmentId() {
+        return qualityDepartmentId;
     }
 
     public JobCapacitationId getJobCapacitationId() {
